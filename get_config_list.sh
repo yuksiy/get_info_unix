@@ -85,6 +85,7 @@ if [ -n "${RPM}" ];then
 fi
 if [ -n "${YUM}" ];then
 	"${YUM}" list installed                            > "${DEST_DIR}/yum-list-installed.log"             2>&1
+	"${YUM}" grouplist installed                       > "${DEST_DIR}/yum-grouplist-installed.log"        2>&1
 fi
 lsmod                                                  > "${DEST_DIR}/lsmod.log"                          2>&1
 if [ -n "${IPTABLES}" ];then
