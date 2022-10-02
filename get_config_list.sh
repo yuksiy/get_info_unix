@@ -26,6 +26,7 @@ CHECK_SUPPORT_STATUS="`which check-support-status 2>/dev/null`"
 DPKG="`which dpkg 2>/dev/null`"
 RPM="`which rpm 2>/dev/null`"
 YUM="`which yum 2>/dev/null`"
+DNF="`which dnf 2>/dev/null`"
 IPTABLES="`which iptables 2>/dev/null`"
 IP6TABLES="`which ip6tables 2>/dev/null`"
 EBTABLES="`which ebtables 2>/dev/null`"
@@ -86,6 +87,10 @@ fi
 if [ -n "${YUM}" ];then
 	"${YUM}" list installed                            > "${DEST_DIR}/yum-list-installed.log"             2>&1
 	"${YUM}" grouplist installed                       > "${DEST_DIR}/yum-grouplist-installed.log"        2>&1
+fi
+if [ -n "${DNF}" ];then
+	"${DNF}" list installed                            > "${DEST_DIR}/dnf-list-installed.log"             2>&1
+	"${DNF}" grouplist installed                       > "${DEST_DIR}/dnf-grouplist-installed.log"        2>&1
 fi
 lsmod                                                  > "${DEST_DIR}/lsmod.log"                          2>&1
 if [ -n "${IPTABLES}" ];then
