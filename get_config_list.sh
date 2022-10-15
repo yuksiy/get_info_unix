@@ -75,113 +75,113 @@ fi
 
 # システム構成情報の取得
 if [ -n "${CHECK_SUPPORT_STATUS}" ];then
-	"${CHECK_SUPPORT_STATUS}"                          > "${DEST_DIR}/check-support-status.log"           2>&1
+	"${CHECK_SUPPORT_STATUS}"                          > "${DEST_DIR}/check-support-status.log"                2>&1
 fi
 if [ -n "${DPKG}" ];then
-	"${DPKG}" -l                                       > "${DEST_DIR}/dpkg-l.log"                         2>&1
-	"${DPKG}" --get-selections                         > "${DEST_DIR}/dpkg--get-selections.log"           2>&1
+	"${DPKG}" -l                                       > "${DEST_DIR}/dpkg-l.log"                              2>&1
+	"${DPKG}" --get-selections                         > "${DEST_DIR}/dpkg--get-selections.log"                2>&1
 fi
 if [ -n "${RPM}" ];then
-	"${RPM}" -qa | sort                                > "${DEST_DIR}/rpm-qa.log"                         2>&1
+	"${RPM}" -qa | sort                                > "${DEST_DIR}/rpm-qa.log"                              2>&1
 fi
 if [ -n "${YUM}" ];then
-	"${YUM}" list installed                            > "${DEST_DIR}/yum-list-installed.log"             2>&1
-	"${YUM}" grouplist installed                       > "${DEST_DIR}/yum-grouplist-installed.log"        2>&1
+	"${YUM}" list installed                            > "${DEST_DIR}/yum-list-installed.log"                  2>&1
+	"${YUM}" group list ids hidden installed           > "${DEST_DIR}/yum-group-list-ids-hidden-installed.log" 2>&1
 fi
 if [ -n "${DNF}" ];then
-	"${DNF}" list installed                            > "${DEST_DIR}/dnf-list-installed.log"             2>&1
-	"${DNF}" grouplist installed                       > "${DEST_DIR}/dnf-grouplist-installed.log"        2>&1
+	"${DNF}" list installed                            > "${DEST_DIR}/dnf-list-installed.log"                  2>&1
+	"${DNF}" group list ids hidden installed           > "${DEST_DIR}/dnf-group-list-ids-hidden-installed.log" 2>&1
 fi
-lsmod                                                  > "${DEST_DIR}/lsmod.log"                          2>&1
+lsmod                                                  > "${DEST_DIR}/lsmod.log"                               2>&1
 if [ -n "${IPTABLES}" ];then
-	"${IPTABLES}"  -t filter   -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-filter.log"              2>&1
-	"${IPTABLES}"  -t nat      -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-nat.log"                 2>&1
-	"${IPTABLES}"  -t mangle   -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-mangle.log"              2>&1
-	"${IPTABLES}"  -t raw      -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-raw.log"                 2>&1
-	"${IPTABLES}"  -t security -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-security.log"            2>&1
+	"${IPTABLES}"  -t filter   -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-filter.log"                   2>&1
+	"${IPTABLES}"  -t nat      -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-nat.log"                      2>&1
+	"${IPTABLES}"  -t mangle   -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-mangle.log"                   2>&1
+	"${IPTABLES}"  -t raw      -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-raw.log"                      2>&1
+	"${IPTABLES}"  -t security -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-security.log"                 2>&1
 fi
 if [ -n "${IP6TABLES}" ];then
-	"${IP6TABLES}" -t filter   -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-filter.log"             2>&1
-	"${IP6TABLES}" -t mangle   -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-mangle.log"             2>&1
-	"${IP6TABLES}" -t raw      -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-raw.log"                2>&1
-	"${IP6TABLES}" -t security -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-security.log"           2>&1
+	"${IP6TABLES}" -t filter   -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-filter.log"                  2>&1
+	"${IP6TABLES}" -t mangle   -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-mangle.log"                  2>&1
+	"${IP6TABLES}" -t raw      -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-raw.log"                     2>&1
+	"${IP6TABLES}" -t security -L -n --line-numbers -v > "${DEST_DIR}/ip6tables-t-security.log"                2>&1
 fi
 if [ -n "${EBTABLES}" ];then
-	"${EBTABLES}"  -t filter   -L --Ln                 > "${DEST_DIR}/ebtables-t-filter.log"              2>&1
-	"${EBTABLES}"  -t nat      -L --Ln                 > "${DEST_DIR}/ebtables-t-nat.log"                 2>&1
-	"${EBTABLES}"  -t broute   -L --Ln                 > "${DEST_DIR}/ebtables-t-broute.log"              2>&1
+	"${EBTABLES}"  -t filter   -L --Ln                 > "${DEST_DIR}/ebtables-t-filter.log"                   2>&1
+	"${EBTABLES}"  -t nat      -L --Ln                 > "${DEST_DIR}/ebtables-t-nat.log"                      2>&1
+	"${EBTABLES}"  -t broute   -L --Ln                 > "${DEST_DIR}/ebtables-t-broute.log"                   2>&1
 fi
-#ifconfig -a                                            > "${DEST_DIR}/ifconfig-a.log"                     2>&1
-#netstat -anp                                           > "${DEST_DIR}/netstat-anp.log"                    2>&1
-#netstat -rn                                            > "${DEST_DIR}/netstat-rn.log"                     2>&1
+#ifconfig -a                                            > "${DEST_DIR}/ifconfig-a.log"                          2>&1
+#netstat -anp                                           > "${DEST_DIR}/netstat-anp.log"                         2>&1
+#netstat -rn                                            > "${DEST_DIR}/netstat-rn.log"                          2>&1
 if [ -n "${BRCTL}" ];then
-	"${BRCTL}" show                                    > "${DEST_DIR}/brctl-show.log"                     2>&1
+	"${BRCTL}" show                                    > "${DEST_DIR}/brctl-show.log"                          2>&1
 	for bridge_dir in `ls -a1d /sys/class/net/*/bridge 2>/dev/null` ; do
 		bridge=$(basename $(dirname ${bridge_dir}))
-		"${BRCTL}" showstp ${bridge}                   > "${DEST_DIR}/brctl-showstp-${bridge}.log"        2>&1
+		"${BRCTL}" showstp ${bridge}                   > "${DEST_DIR}/brctl-showstp-${bridge}.log"             2>&1
 	done
 fi
 if [ -n "${IP}" ];then
-	"${IP}" addr show                                  > "${DEST_DIR}/ip-addr-show.log"                   2>&1
-	"${IP}" link show                                  > "${DEST_DIR}/ip-link-show.log"                   2>&1
-	"${IP}" maddress show                              > "${DEST_DIR}/ip-maddress-show.log"               2>&1
-	"${IP}" rule show                                  > "${DEST_DIR}/ip-rule-show.log"                   2>&1
+	"${IP}" addr show                                  > "${DEST_DIR}/ip-addr-show.log"                        2>&1
+	"${IP}" link show                                  > "${DEST_DIR}/ip-link-show.log"                        2>&1
+	"${IP}" maddress show                              > "${DEST_DIR}/ip-maddress-show.log"                    2>&1
+	"${IP}" rule show                                  > "${DEST_DIR}/ip-rule-show.log"                        2>&1
 	for table in `"${IP}" rule show | awk '{print $5}'` ; do
-		"${IP}" -4 route show table ${table}           > "${DEST_DIR}/ip-4-route-show-table-${table}.log" 2>&1
-		"${IP}" -6 route show table ${table}           > "${DEST_DIR}/ip-6-route-show-table-${table}.log" 2>&1
+		"${IP}" -4 route show table ${table}           > "${DEST_DIR}/ip-4-route-show-table-${table}.log"      2>&1
+		"${IP}" -6 route show table ${table}           > "${DEST_DIR}/ip-6-route-show-table-${table}.log"      2>&1
 	done
 fi
 if [ -n "${SS}" ];then
-	"${SS}" -anptuw                                    > "${DEST_DIR}/ss-anptuw.log"                      2>&1
+	"${SS}" -anptuw                                    > "${DEST_DIR}/ss-anptuw.log"                           2>&1
 fi
-ps -eflH                                               > "${DEST_DIR}/ps-eflH.log"                        2>&1
-who -r                                                 > "${DEST_DIR}/who-r.log"                          2>&1
+ps -eflH                                               > "${DEST_DIR}/ps-eflH.log"                             2>&1
+who -r                                                 > "${DEST_DIR}/who-r.log"                               2>&1
 if [ -n "${EFIBOOTMGR}" ];then
-	"${EFIBOOTMGR}"                                    > "${DEST_DIR}/efibootmgr.log"                     2>&1
+	"${EFIBOOTMGR}"                                    > "${DEST_DIR}/efibootmgr.log"                          2>&1
 fi
 for disk in `ls /sys/block | grep -e "^hd" -e "^sd" -e "^vd" -e "^xvd"` ; do
-	hdparm -i /dev/${disk}                             > "${DEST_DIR}/hdparm-i-${disk}.log"               2>&1
-	cfdisk -P r /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_r-${disk}.log"             2>&1
-	cfdisk -P s /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_s-${disk}.log"             2>&1
-	cfdisk -P t /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_t-${disk}.log"             2>&1
-	fdisk -l /dev/${disk}                              > "${DEST_DIR}/fdisk-l-${disk}.log"                2>&1
-	sfdisk -d /dev/${disk}                             > "${DEST_DIR}/sfdisk-d-${disk}.log"               2>&1
-	sfdisk -l -uS /dev/${disk}                         > "${DEST_DIR}/sfdisk-l-uS-${disk}.log"            2>&1
+	hdparm -i /dev/${disk}                             > "${DEST_DIR}/hdparm-i-${disk}.log"                    2>&1
+	cfdisk -P r /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_r-${disk}.log"                  2>&1
+	cfdisk -P s /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_s-${disk}.log"                  2>&1
+	cfdisk -P t /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_t-${disk}.log"                  2>&1
+	fdisk -l /dev/${disk}                              > "${DEST_DIR}/fdisk-l-${disk}.log"                     2>&1
+	sfdisk -d /dev/${disk}                             > "${DEST_DIR}/sfdisk-d-${disk}.log"                    2>&1
+	sfdisk -l -uS /dev/${disk}                         > "${DEST_DIR}/sfdisk-l-uS-${disk}.log"                 2>&1
 	if [ -n "${SGDISK}" ];then
 		"${SGDISK}" /dev/${disk} -b                     "${DEST_DIR}/sgdisk-b-${disk}.bin" >/dev/null
-		"${SGDISK}" -p /dev/${disk}                    > "${DEST_DIR}/sgdisk-p-${disk}.log"               2>&1
+		"${SGDISK}" -p /dev/${disk}                    > "${DEST_DIR}/sgdisk-p-${disk}.log"                    2>&1
 		for partnum in `"${SGDISK}" -p /dev/${disk} | sed -n '/^Number/,$p' | sed '1d' | awk '{print $1}'` ; do
-			"${SGDISK}" /dev/${disk} -i ${partnum}     > "${DEST_DIR}/sgdisk-${disk}-i-${partnum}.log"    2>&1
+			"${SGDISK}" /dev/${disk} -i ${partnum}     > "${DEST_DIR}/sgdisk-${disk}-i-${partnum}.log"         2>&1
 		done
 	fi
 done
 for fs_dev in `cat /etc/fstab | grep -v "^#" | awk '$3~/ext[234]/ {print $1}'` ; do
 	fs_dev_base=`basename ${fs_dev}`
-	tune2fs -l ${fs_dev}                               > "${DEST_DIR}/tune2fs-l-${fs_dev_base}.log"       2>&1
+	tune2fs -l ${fs_dev}                               > "${DEST_DIR}/tune2fs-l-${fs_dev_base}.log"            2>&1
 done
-df --sync -x iso9660 -Tl                               > "${DEST_DIR}/df--sync-x-iso9660-Tl.log"          2>&1
-df --sync -x iso9660 -Tli                              > "${DEST_DIR}/df--sync-x-iso9660-Tli.log"         2>&1
-mount -l                                               > "${DEST_DIR}/mount-l.log"                        2>&1
-test -n "${PVDISPLAY}" && "${PVDISPLAY}"               > "${DEST_DIR}/pvdisplay.log"                      2>&1
-test -n "${VGDISPLAY}" && "${VGDISPLAY}" -v            > "${DEST_DIR}/vgdisplay-v.log"                    2>&1
-test -n "${LVDISPLAY}" && "${LVDISPLAY}" --maps        > "${DEST_DIR}/lvdisplay--maps.log"                2>&1
+df --sync -x iso9660 -Tl                               > "${DEST_DIR}/df--sync-x-iso9660-Tl.log"               2>&1
+df --sync -x iso9660 -Tli                              > "${DEST_DIR}/df--sync-x-iso9660-Tli.log"              2>&1
+mount -l                                               > "${DEST_DIR}/mount-l.log"                             2>&1
+test -n "${PVDISPLAY}" && "${PVDISPLAY}"               > "${DEST_DIR}/pvdisplay.log"                           2>&1
+test -n "${VGDISPLAY}" && "${VGDISPLAY}" -v            > "${DEST_DIR}/vgdisplay-v.log"                         2>&1
+test -n "${LVDISPLAY}" && "${LVDISPLAY}" --maps        > "${DEST_DIR}/lvdisplay--maps.log"                     2>&1
 if [ -n "${APCACCESS}" ];then
-	"${APCACCESS}" status                              > "${DEST_DIR}/apcaccess-status.log"               2>&1
-	#"${APCACCESS}" eprom                               > "${DEST_DIR}/apcaccess-eprom.log"                2>&1
+	"${APCACCESS}" status                              > "${DEST_DIR}/apcaccess-status.log"                    2>&1
+	#"${APCACCESS}" eprom                               > "${DEST_DIR}/apcaccess-eprom.log"                     2>&1
 fi
 if [ -n "${SYSTEMCTL}" ];then
-	"${SYSTEMCTL}" list-dependencies                   > "${DEST_DIR}/systemctl-list-dependencies.log"    2>&1
-	"${SYSTEMCTL}" list-unit-files                     > "${DEST_DIR}/systemctl-list-unit-files.log"      2>&1
-	"${SYSTEMCTL}" list-units                          > "${DEST_DIR}/systemctl-list-units.log"           2>&1
-	"${SYSTEMCTL}" status                              > "${DEST_DIR}/systemctl-status.log"               2>&1
+	"${SYSTEMCTL}" list-dependencies                   > "${DEST_DIR}/systemctl-list-dependencies.log"         2>&1
+	"${SYSTEMCTL}" list-unit-files                     > "${DEST_DIR}/systemctl-list-unit-files.log"           2>&1
+	"${SYSTEMCTL}" list-units                          > "${DEST_DIR}/systemctl-list-units.log"                2>&1
+	"${SYSTEMCTL}" status                              > "${DEST_DIR}/systemctl-status.log"                    2>&1
 fi
 if [ -n "${HOSTNAMECTL}" ];then
-	"${HOSTNAMECTL}" status                            > "${DEST_DIR}/hostnamectl-status.log"             2>&1
+	"${HOSTNAMECTL}" status                            > "${DEST_DIR}/hostnamectl-status.log"                  2>&1
 fi
 if [ -n "${LOCALECTL}" ];then
-	"${LOCALECTL}" status                              > "${DEST_DIR}/localectl-status.log"               2>&1
+	"${LOCALECTL}" status                              > "${DEST_DIR}/localectl-status.log"                    2>&1
 fi
 if [ -n "${TIMEDATECTL}" ];then
-	"${TIMEDATECTL}" status                            > "${DEST_DIR}/timedatectl-status.log"             2>&1
+	"${TIMEDATECTL}" status                            > "${DEST_DIR}/timedatectl-status.log"                  2>&1
 fi
 
