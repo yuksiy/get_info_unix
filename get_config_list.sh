@@ -84,7 +84,7 @@ fi
 if [ -n "${RPM}" ];then
 	"${RPM}" -qa | sort                                > "${DEST_DIR}/rpm-qa.log"                              2>&1
 fi
-if [ -n "${YUM}" ];then
+if [ \( -n "${YUM}" \) -a \( -z "${DNF}" \) ];then
 	"${YUM}" list installed                            > "${DEST_DIR}/yum-list-installed.log"                  2>&1
 	"${YUM}" group list ids hidden installed           > "${DEST_DIR}/yum-group-list-ids-hidden-installed.log" 2>&1
 fi
