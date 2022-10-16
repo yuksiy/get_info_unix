@@ -30,7 +30,7 @@ INSTALL_DATA = $(INSTALL) -m 644
 
 # Macro Defines
 PROJ = get_info_unix
-VER = 1.0.2
+VER = 1.0.3
 TAG = v$(VER)
 
 TAR_SORT_KEY ?= 6,6
