@@ -139,7 +139,7 @@ who -r                                                 > "${DEST_DIR}/who-r.log"
 if [ -n "${EFIBOOTMGR}" ];then
 	"${EFIBOOTMGR}"                                    > "${DEST_DIR}/efibootmgr.log"                          2>&1
 fi
-for disk in `ls /sys/block | grep -e "^hd" -e "^sd" -e "^vd" -e "^xvd"` ; do
+for disk in `ls /sys/block | grep -e "^hd" -e "^nvme" -e "^sd" -e "^vd" -e "^xvd"` ; do
 	hdparm -i /dev/${disk}                             > "${DEST_DIR}/hdparm-i-${disk}.log"                    2>&1
 	cfdisk -P r /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_r-${disk}.log"                  2>&1
 	cfdisk -P s /dev/${disk}                           > "${DEST_DIR}/cfdisk-P_s-${disk}.log"                  2>&1
