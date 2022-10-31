@@ -35,6 +35,7 @@ IP="`which ip 2>/dev/null`"
 SS="`which ss 2>/dev/null`"
 EFIBOOTMGR="`which efibootmgr 2>/dev/null`"
 SGDISK="`which sgdisk 2>/dev/null`"
+SMARTCTL="`which smartctl 2>/dev/null`"
 PVDISPLAY="`which pvdisplay 2>/dev/null`"
 VGDISPLAY="`which vgdisplay 2>/dev/null`"
 LVDISPLAY="`which lvdisplay 2>/dev/null`"
@@ -93,6 +94,10 @@ if [ -n "${DNF}" ];then
 	"${DNF}" group list ids hidden installed           > "${DEST_DIR}/dnf-group-list-ids-hidden-installed.log" 2>&1
 fi
 lsmod                                                  > "${DEST_DIR}/lsmod.log"                               2>&1
+lspci                                                  > "${DEST_DIR}/lspci.log"                               2>&1
+lspci -n                                               > "${DEST_DIR}/lspci-n.log"                             2>&1
+lspci -v                                               > "${DEST_DIR}/lspci-v.log"                             2>&1
+lspci -v -n                                            > "${DEST_DIR}/lspci-v-n.log"                           2>&1
 if [ -n "${IPTABLES}" ];then
 	"${IPTABLES}"  -t filter   -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-filter.log"                   2>&1
 	"${IPTABLES}"  -t nat      -L -n --line-numbers -v > "${DEST_DIR}/iptables-t-nat.log"                      2>&1
@@ -138,6 +143,7 @@ ps -eflH                                               > "${DEST_DIR}/ps-eflH.lo
 who -r                                                 > "${DEST_DIR}/who-r.log"                               2>&1
 if [ -n "${EFIBOOTMGR}" ];then
 	"${EFIBOOTMGR}"                                    > "${DEST_DIR}/efibootmgr.log"                          2>&1
+	"${EFIBOOTMGR}" -v                                 > "${DEST_DIR}/efibootmgr-v.log"                        2>&1
 fi
 for disk in `ls /sys/block | grep -e "^hd" -e "^nvme" -e "^sd" -e "^vd" -e "^xvd"` ; do
 	hdparm -i /dev/${disk}                             > "${DEST_DIR}/hdparm-i-${disk}.log"                    2>&1
@@ -153,6 +159,9 @@ for disk in `ls /sys/block | grep -e "^hd" -e "^nvme" -e "^sd" -e "^vd" -e "^xvd
 		for partnum in `"${SGDISK}" -p /dev/${disk} | sed -n '/^Number/,$p' | sed '1d' | awk '{print $1}'` ; do
 			"${SGDISK}" /dev/${disk} -i ${partnum}     > "${DEST_DIR}/sgdisk-${disk}-i-${partnum}.log"         2>&1
 		done
+	fi
+	if [ -n "${SMARTCTL}" ];then
+		"${SMARTCTL}" /dev/${disk} -a                  > "${DEST_DIR}/smartctl-a-${disk}.log"                  2>&1
 	fi
 done
 for fs_dev in `cat /etc/fstab | grep -v "^#" | awk '$3~/ext[234]/ {print $1}'` ; do
